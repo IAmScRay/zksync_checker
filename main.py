@@ -7,8 +7,6 @@ import webbrowser
 
 from resources.fetcher import Fetcher, get_price
 
-filename = ""
-
 
 def get_random_color() -> str:
     red = random.randint(0, 255)
