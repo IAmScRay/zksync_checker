@@ -73,6 +73,9 @@ class Fetcher:
             decimals = data["token"]["decimals"]
             balance = round(int(data["balance"]) / 10 ** decimals, 6)
 
+            if balance == 0:
+                continue
+
             results[symbol] = {
                 "balance": balance,
                 "usd_value": round(balance * get_price(symbol), 2) if symbol in ["ETH", "USDT", "USDC"] else "* * *"
