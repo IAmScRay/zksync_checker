@@ -42,6 +42,10 @@ def open_etherscan(address: str):
     webbrowser.open(f"https://etherscan.io/address/{address}", 2)
 
 
+def open_arbiscan(address: str):
+    webbrowser.open(f"https://arbiscan.io/address/{address}", 2)
+
+
 def show_stats(address: str):
     if len(address) != 42:
         showwarning("Неверный ввод!", "Строка адреса должна быть длиной 42 символа.\n\n"
@@ -78,19 +82,19 @@ def show_stats(address: str):
 
         addr_lbl = tk.Label(
             master=header_frame,
-            text="Адрес",
+            text="⚒️ Адрес",
             font=("Helvetica", 14, "normal")
         )
         addr_lbl.grid(row=0, column=0, padx=3, pady=5)
 
         addr = tk.Label(
             master=header_frame,
-            text=address,
+            text=address + " ⚒️",
             font=("Helvetica", 14, "bold")
         )
         addr.grid(row=0, column=1, padx=3, pady=5)
 
-        header_frame.pack(padx=3, pady=3)
+        header_frame.pack(padx=3, pady=5)
 
         table_frame = tk.Frame(
             master=top_level
@@ -126,16 +130,16 @@ def show_stats(address: str):
 
                 column += 1
 
-        table_frame.pack(padx=3, pady=3)
+        table_frame.pack(padx=3, pady=5)
 
         ttk.Separator(
             master=top_level,
             orient=tk.HORIZONTAL
-        ).pack(padx=3, pady=3, fill=tk.X)
+        ).pack(padx=5, pady=5, fill=tk.X)
 
         bal_lbl = tk.Label(
             master=top_level,
-            text="Активы",
+            text="💵 Активы 💵",
             font=("Helvetica", 18, "bold")
         )
         bal_lbl.pack(padx=3, pady=3)
@@ -239,12 +243,19 @@ def show_stats(address: str):
         )
         fee_txt.grid(row=3, column=column, padx=3)
 
-        balances_frame.pack(padx=3, pady=3)
+        balances_frame.pack(padx=3, pady=5)
 
         ttk.Separator(
             master=top_level,
             orient=tk.HORIZONTAL
-        ).pack(padx=3, pady=3, fill=tk.X)
+        ).pack(padx=5, pady=5, fill=tk.X)
+
+        explr_lbl = tk.Label(
+            master=top_level,
+            text="🔎 Explorer-ы 🔎",
+            font=("Helvetica", 18, "bold")
+        )
+        explr_lbl.pack(padx=3, pady=5)
 
         buttons_frame = tk.Frame(
             master=top_level
@@ -252,40 +263,52 @@ def show_stats(address: str):
 
         era_explr_btn = tk.Button(
             master=buttons_frame,
-            text="Открыть Era Explorer",
+            text="Era Explorer",
             font=("Helvetica", 12, "normal"),
             command=lambda: [
                 open_era_explorer(address)
             ]
         )
-
         era_explr_btn.grid(row=0, column=0, padx=3)
 
         etherscan_explr_btn = tk.Button(
             master=buttons_frame,
-            text="Открыть Etherscan",
+            text="Etherscan",
             font=("Helvetica", 12, "normal"),
             command=lambda: [
                 open_etherscan(address)
             ]
         )
-
         etherscan_explr_btn.grid(row=0, column=1, padx=3)
 
+        arb_explr_btn = tk.Button(
+            master=buttons_frame,
+            text="Arbiscan",
+            font=("Helvetica", 12, "normal"),
+            command=lambda: [
+                open_arbiscan(address)
+            ]
+        )
+        arb_explr_btn.grid(row=0, column=2, padx=3)
+
         buttons_frame.pack(padx=3, pady=3)
+
+        ttk.Separator(
+            master=top_level,
+            orient=tk.HORIZONTAL
+        ).pack(padx=5, pady=5, fill=tk.X)
 
         close_btn = tk.Button(
             master=top_level,
             text="Закрыть",
-            font=("Helvetica", 12, "normal"),
+            font=("Helvetica", 12, "bold"),
             command=lambda: [
                 top_level.destroy(),
                 window.wm_deiconify(),
                 window.winfo_children()[2].winfo_children()[1].delete(0, END)
             ]
         )
-
-        close_btn.pack(padx=3, pady=3)
+        close_btn.pack(padx=3, pady=8)
 
 
 window = tk.Tk()
@@ -341,7 +364,7 @@ def main():
     ttk.Separator(
         master=window,
         orient=tk.HORIZONTAL
-    ).pack(padx=3, pady=3, fill=tk.X)
+    ).pack(padx=5, pady=5, fill=tk.X)
 
     proceed_btn = tk.Button(
         master=window,
